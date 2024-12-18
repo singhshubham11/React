@@ -1,0 +1,58 @@
+As we know in end of the day React is compiled to HTML, CSS, JAVASCRIPT our browser undestands only HTML, CSS, JAVASCRIPT
+Browser Does not understand React
+
+where to use React?
+=> it is used where there is a complex front-end it means on 1 click 3 to 4 paces is going to be update
+
+why React was created?
+=> Example Analogy
+Old Way:
+        Imagine a wall with 100 tiles. If one tile is dirty, 
+        you: Repaint the entire wall (all 100 tiles), even though only one tile needs cleaning.
+
+
+New Way (React):
+                If one tile is dirty,
+                you: Clean just that one tile, leaving the other 99 untouched.
+
+Conclusion => With React, the cart updates faster and with less work for the developer because React:
+              Figures out what exactly changed (like adding an item).
+              Updates only that small part of the page.
+
+
+difference between FRAMEWORK & LIBRARY
+=> FRAMEWORK: Think of a framework like a strict, regimented school with a set curriculum and rules. 
+              It dictates how students should learn and behave.
+              Examples: Angular, Django, Ruby on Rails.
+
+   LIBRARY: Imagine a library as a helpful, flexible tutor. It gives you tools and functions that
+            you can use whenever and however you want.
+            Examples: React, jQuery, Lodash.
+
+
+How React Does This:
+=> Virtual DOM: React doesn’t update the entire page directly. It creates a copy of the page (called the "virtual DOM"), 
+                figures out the exact change needed, and updates only that part of the real page. This makes things much faster.
+
+=> Components: React splits the webpage into small, reusable pieces called "components." Each component manages 
+               its own behavior, making the code easier to write and understand.
+
+
+
+
+React
+React-DOM: used for webpage
+React-Native: used for mobole apps
+
+
+In whole Documentation of react they have not mentioned that about create-react-app utility.
+but this utility is famous and Bulky becoz it has unnessecary package that we donot use.
+=> npx create-react-app 01_basicreact
+
+the entry point for any code is package.json in which each and every detail is given
+it is recommended to use npm run in start. But why ? reason unknown
+
+
+as we know craete-react-app is Bulky that is why it is recommended to use VITE and PARCEL these are also a utility
+=> npm create vite@latest
+and fill the details

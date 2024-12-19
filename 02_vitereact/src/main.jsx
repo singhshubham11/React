@@ -46,7 +46,7 @@ function MyApp() {
 
 // -------------------------------------------------------------------------------------------------------
 
-// const reactElement2 = createElement(
+// const ReactElement = createElement(
 //   'a',
 //   { href: 'https://google.com', target: '_blank' },
 //   'Click on this Link!'
@@ -54,23 +54,23 @@ function MyApp() {
 
 
 // createRoot(document.getElementById('root')).render( 
-//   reactElement2
+//   ReactElement
 //  )
 
 // -------------------------------------------------------------------------------------------------------
 
-const username = "shubham"
-const reactElement2 = createElement(
-  'a',
-  { href: 'https://google.com', target: '_blank' },
-  'Click on this Link!',
-  username
-);
+// const username = "shubham"
+// const reactElement2 = createElement(
+//   'a',
+//   { href: 'https://google.com', target: '_blank' },
+//   'Click on this Link!',
+//   username
+// );
 
 
-createRoot(document.getElementById('root')).render( 
-  reactElement2
- )
+// createRoot(document.getElementById('root')).render( 
+//   reactElement2
+//  )
 
 
 // -------------------------------------------------------------------------------------------------------

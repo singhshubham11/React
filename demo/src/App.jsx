@@ -51,24 +51,58 @@
 // export default App;
 
 
-import React, { useCallback, useState } from "react";
+// import React, { useCallback, useState } from "react";
 
-function Child({ onClick }) {
-  console.log("Child rendered!");
-  return <button onClick={onClick}>Click me</button>;
-}
+// function Child({ onClick }) {
+//   console.log("Child rendered!");
+//   return <button onClick={onClick}>Click me</button>;
+// }
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   const handleClick = useCallback(() => {
+//     console.log("Clicked!");
+//   }, [])
+
+//   return (
+//     <div>
+//       <button onClick={() => setCount(count + 1)}>Increment App: {count}</button>
+//       <Child onClick={handleClick} />
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const handleClick = useCallback(() => {
-    console.log("Clicked!");
-  }, [])
+  // Effect that runs once on mount
+  useEffect(() => {
+    console.log('Component mounted');
+
+    // Cleanup on unmount
+    return () => {
+      console.log('Component unmounted');
+    };
+  }, []); // Empty dependency array -> runs only on mount and cleanup on unmount
+
+  // Effect that runs on mount and whenever `count` changes
+  useEffect(() => {
+    console.log(`Count updated to: ${count}`);
+
+    return () => {
+      console.log(`Cleanup after count updated to: ${count}`);
+    };
+  }, [count]); // Dependency array -> runs on mount + updates when `count` changes
 
   return (
     <div>
-      <button onClick={() => setCount(count + 1)}>Increment App: {count}</button>
-      <Child onClick={handleClick} />
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );
 }

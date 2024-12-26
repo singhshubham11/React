@@ -75,36 +75,85 @@
 
 // export default App;
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   // Effect that runs once on mount
+//   useEffect(() => {
+//     console.log('Component mounted');
+
+//     // Cleanup on unmount
+//     return () => {
+//       console.log('Component unmounted');
+//     };
+//   }, []); // Empty dependency array -> runs only on mount and cleanup on unmount
+
+//   // Effect that runs on mount and whenever `count` changes
+//   useEffect(() => {
+//     console.log(`Count updated to: ${count}`);
+
+//     return () => {
+//       console.log(`Cleanup after count updated to: ${count}`);
+//     };
+//   }, [count]); // Dependency array -> runs on mount + updates when `count` changes
+
+//   return (
+//     <div>
+//       <p>Count: {count}</p>
+//       <button onClick={() => setCount(count + 1)}>Increment</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React, { useCallback, useEffect, useRef, useState } from "react";
 function App() {
-  const [count, setCount] = useState(0);
+  const [length, setLength] = useState(6);
+  const [numberAllowed, setNumberAllowed] = useState(false);
+  const [charAllowed, setCharAllowed] = useState(false);
+  const [password, setPassword] = useState("");
 
-  // Effect that runs once on mount
-  useEffect(() => {
-    console.log('Component mounted');
+  const passwordRef = useRef(null);
 
-    // Cleanup on unmount
-    return () => {
-      console.log('Component unmounted');
-    };
-  }, []); // Empty dependency array -> runs only on mount and cleanup on unmount
+const passwordGenerator = useCallback(() => {
+  let pass = "";
+  let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrustuvwxyz";
+  if (numberAllowed) {
+    str += "0123456789";
+  }
+  if (charAllowed) {
+    str += "! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~ • ∆ ∇ √ ∞ ≈ ∩ ∪ ⊂ ⊃ ⊆ ⊇ ↔ ↑ ↓ ↵ ∀ ∃ ∂ ∆ ∏ ∑ − ∫ α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω";
+  }
 
-  // Effect that runs on mount and whenever `count` changes
-  useEffect(() => {
-    console.log(`Count updated to: ${count}`);
+  for (let i = 0; i <= length; i++) {
+   let char = Math.round(Math.random() * str.length + 1);
+   pass += str.charAt(char);
+  }
 
-    return () => {
-      console.log(`Cleanup after count updated to: ${count}`);
-    };
-  }, [count]); // Dependency array -> runs on mount + updates when `count` changes
+  setPassword(pass);
+}, [length, numberAllowed, charAllowed])
 
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
-  );
+const copyPasswordTo = useCallback(() => {
+passwordRef.current?.select()
+passwordRef.current?.setSelectionRange(0, 50)
+window.navigator.clipboard.writeText(password)
+},[password])
+
+useEffect(() => {passwordGenerator()},[length, numberAllowed, charAllowed, passwordGenerator])
+
+  return(
+    <>
+    <h1>Hello</h1>
+  <input type="text" value={password} readOnly ref={passwordRef} />
+  <button onClick={copyPasswordTo}>Copy</button>
+  <label>Length: {length}</label>
+  <input type="range" value={length} onChange={(e) => setLength(e.target.value)} /><label>numberAllowed: {numberAllowed}</label>
+  <input type="checkbox" onChange={(e) => setNumberAllowed(e.target.checked)} /><label>charAllowed: {charAllowed}</label>
+  <input type="checkbox" onChange={(e) => setCharAllowed(e.target.checked)} />
+    </>
+  )
 }
-
-export default App;
+export default App

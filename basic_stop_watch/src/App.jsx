@@ -7,7 +7,6 @@ function App() {
 
   // Function to start the timer
   const startTimer = () => {
-    console.log(timerRef.current)
     if (!timerRef.current) {
       timerRef.current = setInterval(() => {
         setTime(new Date().toLocaleTimeString());

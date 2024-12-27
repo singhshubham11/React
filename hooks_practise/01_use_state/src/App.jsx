@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 // function App() {
@@ -126,5 +126,87 @@ import { useState } from 'react'
 //   );
 // }
 
+
+// function App() {
+//   const [car, setCar] = useState({
+//     brand: "Toyota",
+//     color: "red",
+//     speed: 100,
+//   });
+
+//  const paintCar = () => {
+//   setCar({...car, color: car.color = "Blue"})
+//  }
+//  const speedUp = () => {
+//   setCar({...car, speed: car.speed + 20})
+//  }
+
+//   return (
+//     <>
+//     <p>Brand: {car.brand}</p>
+//       <p>Color: {car.color}</p>
+//       <p>Speed: {car.speed} km/h</p>
+//       <button onClick={paintCar}>Paint Blue</button>
+//       <button onClick={speedUp}>Speed Up</button>
+//     </>
+//   );
+// }
+
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   const increment = () => {
+//     setCount((pre) => pre + 1); // You ask React to increase the count
+//     console.log(count); // But here, React hasn’t updated it yet, so this logs the old value
+//   };
+
+//   return <button onClick={increment}>Count: {count}</button>;
+// }
+
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   const increment = () => {
+//     console.log("before")
+//     setCount(count + 1);
+//   };
+
+//   useEffect(() => {
+//     console.log("after:", count); // Runs after React updates the count
+//   }, [count]); // Only run this when 'count' changes
+
+//   return <button onClick={increment}>Count: {count}</button>;
+// }
+
+
+function App() {
+  const [score, setScore] = useState(0);
+  const [time, setTime] = useState(60);
+  const [lives, setLives] = useState(3);
+
+  const increaseScore = () => {
+    setScore(score + 10)
+  }
+  const decreaseTime = () => {
+    setTime(time - 1)
+  }
+  const loseLife = () => {
+    setLives(lives - 1)
+  }
+
+  return (
+    <div>
+      <h1>Game</h1>
+      <p>Score: {score}</p>
+      <p>Time Left: {time}s</p>
+      <p>Lives: {lives}</p>
+      <button onClick={increaseScore}>Increase Score</button>
+      <button onClick={decreaseTime}>Decrease Time</button>
+      <button onClick={loseLife}>Lose a Life</button>
+    </div>
+  );
+}
 
 export default App

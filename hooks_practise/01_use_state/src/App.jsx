@@ -181,31 +181,225 @@ import { useState, useEffect } from 'react'
 // }
 
 
+// function App() {
+//   const [score, setScore] = useState(0);
+//   const [time, setTime] = useState(60);
+//   const [lives, setLives] = useState(3);
+
+//   const increaseScore = () => {
+//     setScore(score + 10)
+//   }
+//   const decreaseTime = () => {
+//     setTime(time - 1)
+//   }
+//   const loseLife = () => {
+//     setLives(lives - 1)
+//   }
+
+//   return (
+//     <div>
+//       <h1>Game</h1>
+//       <p>Score: {score}</p>
+//       <p>Time Left: {time}s</p>
+//       <p>Lives: {lives}</p>
+//       <button onClick={increaseScore}>Increase Score</button>
+//       <button onClick={decreaseTime}>Decrease Time</button>
+//       <button onClick={loseLife}>Lose a Life</button>
+//     </div>
+//   );
+// }
+
+
+// function App() {
+//   const [items, setItems] = useState([]);
+
+// function addItem(newItem) {
+//   setItems((prevItems) => [...prevItems, newItem]); // Add to the existing list
+// }
+
+// return (
+//   <div>
+//     <button onClick={() => addItem("Apple")}>Add Apple</button>
+//     <button onClick={() => addItem("Banana")}>Add Banana</button>
+//     <p>Items: {items.join(", ")}</p>
+//   </div>
+// );
+
+// }
+
+
+
+// function App() {
+//   function slowSetup() {
+//     console.log("Initializing state...");
+//     return Array(1000000).fill(0);
+//   }
+
+//   const [numbers, setNumbers] = useState(() => slowSetup()); // Lazy initialization
+
+//   return (
+//     <div>
+//       <p>Array length: {numbers.length}</p>
+//     </div>
+//   );
+// }
+
+
+
+// function App() {
+//   const [user, setUser] = useState({
+//     name: '',
+//     email: '',
+//     age: null,
+//     hobbies: [],
+//   });
+
+//   function updateUser(property, value) {
+//     setUser((prevUser) => ({
+//       ...prevUser,
+//       [property]: value,
+//     }));
+//   }
+
+//   function addHobby(newHobby) {
+//     setUser((prevUser) => ({
+//       ...prevUser,
+//       hobbies: [...prevUser.hobbies, newHobby],
+//     }));
+//   }
+
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         placeholder="Name"
+//         value={user.name}
+//         onChange={(e) => updateUser('name', e.target.value)}
+//       />
+//       <input
+//         type="text"
+//         placeholder="Email"
+//         value={user.email}
+//         onChange={(e) => updateUser('email', e.target.value)}
+//       />
+//       <button onClick={() => addHobby('Reading')}>Add Hobby</button>
+//       <p>Name: {user.name}</p>
+//       <p>Email: {user.email}</p>
+//       <p>Hobbies: {user.hobbies.join(', ')}</p>
+//     </div>
+//   );
+// }
+
+
+
+// function App() {
+//   const [name, setName] = useState(""); // Hold name input
+//   const [email, setEmail] = useState(""); // Hold email input
+
+//   const handleSubmit = () => {
+//     alert(`Name: ${name}, Email: ${email}`);
+//   };
+
+//   return (
+//     <div style={{ textAlign: 'center', marginTop: '50px' }}>
+//       <h1>Simple Form</h1>
+      
+//       {/* Name Input */}
+//       <div>
+//         <label>
+//           Name: 
+//           <input 
+//             type="text" 
+//             value={name} 
+//             onChange={(e) => setName(e.target.value)} 
+//           />
+//         </label>
+//       </div>
+      
+//       {/* Email Input */}
+//       <div>
+//         <label>
+//           Email: 
+//           <input 
+//             type="email" 
+//             value={email} 
+//             onChange={(e) => setEmail(e.target.value)} 
+//           />
+//         </label>
+//       </div>
+      
+//       {/* Submit Button */}
+//       <div>
+//         <button onClick={handleSubmit}>Submit</button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+// function App() {
+//   const [items, setItems] = useState([]); // Start with an empty list
+//   const [newItem, setNewItem] = useState(""); // Input box for new item
+
+//   // Function to add item
+//   const addItem = () => {
+//     if (newItem.trim() !== "") { // Only add if not empty
+//       setItems([...items, newItem]); // Add new item to the list
+//       setNewItem(""); // Clear input box
+//     }
+//   };
+
+//   // Function to remove item
+//   const removeItem = (index) => {
+//     const updatedItems = items.filter((_, i) => i !== index); // Remove by index
+//     setItems(updatedItems);
+//   };
+
+//   return (
+//     <div style={{ textAlign: 'center', marginTop: '50px' }}>
+//       <h1>Dynamic List</h1>
+      
+//       {/* Input box and Add button */}
+//       <div>
+//         <input 
+//           type="text" 
+//           value={newItem} 
+//           onChange={(e) => setNewItem(e.target.value)} 
+//           placeholder="Enter item"
+//         />
+//         <button onClick={addItem}>Add</button>
+//       </div>
+
+//       {/* Display the list */}
+//       <ul>
+//         {items.map((item, index) => (
+//           <li key={index}>
+//             {item} 
+//             <button onClick={() => removeItem(index)}>Remove</button>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+
 function App() {
-  const [score, setScore] = useState(0);
-  const [time, setTime] = useState(60);
-  const [lives, setLives] = useState(3);
+  const[isDarkMode, setIsDarkMode] = useState(false);
 
-  const increaseScore = () => {
-    setScore(score + 10)
+  const toggelTheme = () => {
+    setIsDarkMode(!isDarkMode)
   }
-  const decreaseTime = () => {
-    setTime(time - 1)
-  }
-  const loseLife = () => {
-    setLives(lives - 1)
-  }
-
-  return (
-    <div>
-      <h1>Game</h1>
-      <p>Score: {score}</p>
-      <p>Time Left: {time}s</p>
-      <p>Lives: {lives}</p>
-      <button onClick={increaseScore}>Increase Score</button>
-      <button onClick={decreaseTime}>Decrease Time</button>
-      <button onClick={loseLife}>Lose a Life</button>
+  return(
+    <>
+    <div style={{backgroundColor: isDarkMode ? '#333' : '#FFF',
+      color: isDarkMode ? '#FFF' : '#000'
+    }}>
+    <h1>{isDarkMode ? 'Dark Mode' : 'Light Mode'}</h1>
+    <button onClick={toggelTheme}>Toggel Theme</button>
     </div>
+    </>
   );
 }
 

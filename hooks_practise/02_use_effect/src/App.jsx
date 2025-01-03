@@ -190,43 +190,234 @@ import { useEffect, useState } from 'react'
 // }
 
 
+// function App() {
+//   const [users, setUsers] = useState([]); // State to store the users.
+//   const [loading, setLoading] = useState(true); // State to show a loading message.
+
+//   useEffect(() => {
+//     // This is where the API call happens.
+//     const fetchUsers = async () => {
+//       console.log("tong")
+
+//       try {
+//         const response = await fetch('https://jsonplaceholder.typicode.com/users'); // Fetch the users.
+//         const data = await response.json(); // Convert the response to JSON.
+//         setUsers(data); // Save the users in the state.
+//         setLoading(false); // Turn off the loading message.
+//       } catch (error) {
+//         console.error('Error fetching data:', error);
+//         setLoading(false); // Turn off the loading message even if there's an error.
+//       }
+//     };
+
+//     fetchUsers(); // Call the function to fetch users.
+//     console.log("ting")
+//   }, []); // Empty array = run only once when the component mounts.
+
+//   // Show loading message while fetching data.
+//   if (loading) return <h1>Loading...</h1>;
+
+//   return (
+//     <div>
+//       <h1>Users</h1>
+//       <ul>
+//         {users.map((user) => (
+//           <li key={user.id}>{user.name}</li> // Display each user's name.
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+
+// function App() {
+//   const [message, setMessage] = useState('');
+//   const [batteryLevel, setBatteryLevel] = useState(100);
+
+//   // Side effect 1: Make the robot talk
+//   useEffect(() => {
+//     console.log(`Robot says: ${message}`);
+//   }, [message]); // This effect runs when "message" changes.
+
+//   // Side effect 2: Blink lights if the battery is low
+//   useEffect(() => {
+//     if (batteryLevel < 20) {
+//       console.log('Battery low! Blinking lights...');
+//     }
+//   }, [batteryLevel]); // This effect runs when "batteryLevel" changes.
+
+//   return (
+//     <div>
+//       <p>Battery Level: {batteryLevel}%</p>
+//       <p>Message: {message}</p>
+
+//       <button onClick={() => setMessage('Hello, human!')}>Make Robot Talk</button>
+//       <button onClick={() => setBatteryLevel(batteryLevel - 10)}>Use Battery</button>
+//     </div>
+//   );
+// }
+
+
+
+
+// function App() {
+//   const [time, setTime] = useState(0);
+//   useEffect(() => {
+//     const interval =
+//       setInterval(() => {
+//         setTime(time + 1);
+//       },1000)
+//       return () => clearInterval(interval);
+    
+//   }, [time])
+//   return(<>
+//   <div>Time : {time}</div>
+//   </>);
+// }
+
+
+// function App() {
+
+//   const [searchTerm, setSearchTerm] = useState('');
+//   const [results, setResults] = useState([]);
+
+//   useEffect(() => {
+//     const timeout = setTimeout(() => {
+//       if (searchTerm) {
+//         fetch(`https://reqres.in/api/users?q=${searchTerm}`)
+//           .then(response => response.json())
+//           .then(data => setResults(data));
+//       }
+//     }, 500); // Wait 500ms before making the API call
+
+//     return () => clearTimeout(timeout); // Clean up the timeout if searchTerm changes
+//   },[searchTerm]);
+
+//   return(
+//     <div>
+//       <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Type to search...' />
+//       <div>{results.length > 0 ? JSON.stringify(results) : 'NO results' } </div>
+//     </div>
+//   );
+// }
+
+// function App() {
+//   const [data, setData] = useState(null);
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       const response = await fetch('https://reqres.in/api/users');
+//       const result = await response.json();
+//       setData(result);
+//     }
+//     fetchData();
+//   }, []); // Runs only when the component loads
+
+//   return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
+// }
+
+
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   useEffect(() => {
+//     console.log('start');
+//     const handleClick = () => setCount((prev) => prev + 1);
+//     document.addEventListener('click', handleClick);
+
+//     return () => {
+//       document.removeEventListener('click', handleClick);
+//       console.log('end');
+//     };
+//   }, []);
+
+//   return <div>Click Count: {count}</div>;
+// }
+
+
+// function App() {
+//   const [user, setUser] = useState([]);
+//   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+// useEffect(() => {
+//   async function fetchUsers () {
+//     const response = await fetch('https://teamtreehouse.com/profiles/matthew.json');
+//     const result = await response.json();
+//     setUser(result)
+//   }
+//   fetchUsers();
+// }, [])
+
+// useEffect(() => {
+//   if (user) {
+//     document.title = `Welcome, ${user.name}`;
+//   }
+// }, [user])
+
+// useEffect(() => {
+//   const handleResize = () => {
+//     setWindowWidth(window.innerWidth);
+//   }
+//   window.addEventListener('resize', handleResize);
+//   return () => {
+//     window.removeEventListener('resize', handleResize); // Cleanup on unmount
+//   };
+// }, [])
+
+//   return(<>
+//   <h1>{user ? `Hello, ${user.name}` : 'Loading...' }</h1>
+//   <p>Window width : {windowWidth} </p>
+//   </>);
+// }
+
+
+// function App() {
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       console.log("Running...");
+//     }, 1000);
+  
+//     // Cleanup function
+//     return async () => {
+//       clearInterval(interval);
+//       console.log("Cleaned up!");
+//     };
+//   }, []);
+  
+//   return(<>
+//   <h1>Hello</h1>
+//   </>);
+// }
+
+
 function App() {
-  const [users, setUsers] = useState([]); // State to store the users.
-  const [loading, setLoading] = useState(true); // State to show a loading message.
+    const [joke, setJoke] = useState("");
 
-  useEffect(() => {
-    // This is where the API call happens.
-    const fetchUsers = async () => {
-      console.log("tong")
+    const fetchJoke = async () => {
+        try {
+            const response = await fetch("https://api.chucknorris.io/jokes/random");
+            const result = await response.json();
+            setJoke(result.value)
+        } catch (error) {
+            console.error("Failed to fetch joke:", error);
+        }
+    }
 
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users'); // Fetch the users.
-        const data = await response.json(); // Convert the response to JSON.
-        setUsers(data); // Save the users in the state.
-        setLoading(false); // Turn off the loading message.
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false); // Turn off the loading message even if there's an error.
-      }
-    };
+    useEffect(() => {
+        fetchJoke()
+        const interval = setInterval(() => {
+            fetchJoke()
+        },5000)
 
-    fetchUsers(); // Call the function to fetch users.
-    console.log("ting")
-  }, []); // Empty array = run only once when the component mounts.
+        return () => clearInterval(interval);
+    }, [])
 
-  // Show loading message while fetching data.
-  if (loading) return <h1>Loading...</h1>;
 
-  return (
-    <div>
-      <h1>Users</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>{user.name}</li> // Display each user's name.
-        ))}
-      </ul>
-    </div>
-  );
+    return(<>
+    <h1>Random Joke</h1>
+    <p>{joke || "Loading..."}</p>
+    </>);
 }
 
 export default App

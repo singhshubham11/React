@@ -391,33 +391,144 @@ import { useEffect, useState } from 'react'
 // }
 
 
-function App() {
-    const [joke, setJoke] = useState("");
+// function App() {
+//     const [joke, setJoke] = useState("");
 
-    const fetchJoke = async () => {
-        try {
-            const response = await fetch("https://api.chucknorris.io/jokes/random");
-            const result = await response.json();
-            setJoke(result.value)
-        } catch (error) {
-            console.error("Failed to fetch joke:", error);
-        }
+//     const fetchJoke = async () => {
+//         try {
+//             const response = await fetch("https://api.chucknorris.io/jokes/random");
+//             const result = await response.json();
+//             setJoke(result.value)
+//         } catch (error) {
+//             console.error("Failed to fetch joke:", error);
+//         }
+//     }
+
+//     useEffect(() => {
+//         fetchJoke()
+//         const interval = setInterval(() => {
+//             fetchJoke()
+//         },5000)
+
+//         return () => clearInterval(interval);
+//     }, [])
+
+
+//     return(<>
+//     <h1>Random Joke</h1>
+//     <p>{joke || "Loading..."}</p>
+//     </>);
+// }
+
+
+// function App() {
+//     const [time, setTime] = useState(0);
+//     const [isRunning, setIsRunning] = useState(false); 
+
+//     useEffect(() => {
+//         let interval; 
+        
+//         if (isRunning) {
+//             interval = setInterval(() => {
+//                 setTime((prevTime) => prevTime + 1)
+//             },1000)
+//         }
+
+//         return () => {
+//             clearInterval(interval);
+//           };
+
+//     }, [isRunning])
+    
+//     const startStopwatch = () => setIsRunning(true);
+//     const stopStopwatch = () => setIsRunning(false);
+//     const resetStopwatch = () => {
+//         setIsRunning(false);
+//         setTime(0);
+//     }
+
+//     return (
+//         <div>
+//           <h1>Stopwatch</h1>
+//           <h2>{time} seconds</h2>
+//           <button onClick={startStopwatch}>Start</button>
+//           <button onClick={stopStopwatch}>Stop</button>
+//           <button onClick={resetStopwatch}>Reset</button>
+//         </div>
+//       );
+//     }
+
+  
+
+// function App() {
+//     const [searchText, setSearchText] = useState("");
+//     const [suggestions, setSuggestions] = useState([]);
+
+//     useEffect(() => {
+//         const debounceTimeout = setTimeout(() => {
+//             if (searchText) {
+//                 const allFruits = ["apple", "banana", "cherry", "date", "fig", "grape"];
+//                 const filteredFruits = allFruits.filter((fruit) => fruit.toLowerCase().includes(searchText.toLowerCase()) )
+//                 setSuggestions(filteredFruits);
+//             } else {
+//                 setSuggestions([]);
+//             }
+//         }, 300)
+
+//         return () => clearTimeout(debounceTimeout);
+//     }, [searchText])
+
+//     return(<>
+//     <input type="text" placeholder='Search here...' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+//     <ul>{suggestions.map((suggestion, index) => (
+//         <li key={index}>{suggestion} </li>
+//     ))} </ul>
+//     </>);
+// }
+
+
+// function App() {
+//     const [searchText, setSearchText] = useState("");
+
+//     useEffect(() => {
+//         document.title = searchText || "React";
+//     }, [searchText])
+
+
+//     return(<>
+//     <input type="text" placeholder='Type here...' value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+//     </>)
+// }
+
+
+function App() {
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth, 
+        height: window.innerHeight, 
+    });
+
+    const handleResize = () => {
+        setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight
+        })
     }
 
     useEffect(() => {
-        fetchJoke()
-        const interval = setInterval(() => {
-            fetchJoke()
-        },5000)
+        window.addEventListener('resize', handleResize)
 
-        return () => clearInterval(interval);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+          };
+          
+
     }, [])
 
-
     return(<>
-    <h1>Random Joke</h1>
-    <p>{joke || "Loading..."}</p>
-    </>);
+    <h1>Window Resize Tracker</h1>
+    <p>Width: {windowSize.width}px</p>
+    <p>Height: {windowSize.height}px</p>
+    </>)
 }
 
 export default App
